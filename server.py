@@ -11,17 +11,18 @@ app = Flask(__name__)
 def index():
     """Home page."""
 
-    return 'Hello, world!'
+    return render_template('index.html')
 
 
 @app.route('/wear-this')
 def show_result():
     """Tell user what to wear."""
 
-    # location = request.args.get('location')
+    # Get form variable from request
+    location = request.args.get('location')
 
-    # return render_template('result.html',
-    #                         location=location)
+    return render_template('result.html',
+                            location=location)
 
     return 'Location object appears here!'
 
@@ -29,4 +30,4 @@ def show_result():
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads" our
     # web app if we change the code.
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
