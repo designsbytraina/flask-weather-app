@@ -46,7 +46,7 @@ Once all required packages have finished installing and you have sourced your ke
 (env) $ python server.py
 ```
 
-Visit [localhost:5000]() in the browser of your choice to make weather queries to your heart's content.
+Visit [localhost:5000](http://localhost:5000/) in the browser of your choice to make weather queries to your heart's content.
 
 #### Acknowledgements
 Thank you to Hackbright Academy and its incredible students + staff 🦄
