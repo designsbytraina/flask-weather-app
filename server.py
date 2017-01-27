@@ -46,8 +46,11 @@ def show_results():
     # Make call to helper function get_current_weather() with location_key
     weather_obj = get_current_weather(location_key)
 
+    # TODO - Add logic for weather graphics and color changes
+    # TODO - Add logic for serving different messages based on weather conditions
+
     # Render template passing weather object attributes to be accessible on the frontend
-    return render_template('result.html',
+    return render_template('results.html',
                             location=location,
                             sentiment=weather_obj['sentiment'],
                             temp=weather_obj['temp'],
@@ -61,7 +64,7 @@ def get_current_weather(location):
     # Define payload for query to Accuweather API
     payload = {'apikey':API_KEY}
 
-    # Make request to Accuwether API and save response object
+    # Make request to Current Conditions API and save response object
     response = requests.get('http://dataservice.accuweather.com/currentconditions/v1/%s' % location, params=payload)
 
     # Define variables using attributes returned in JSON
@@ -77,7 +80,7 @@ def get_current_weather(location):
 
 
 ##################################
-# Necessary to get application to run.
+# Necessary to get application running.
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads" our
     # web app if we change the code.

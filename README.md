@@ -51,4 +51,6 @@ Visit [localhost:5000](http://localhost:5000/) in the browser of your choice to 
 #### Acknowledgements
 Thank you to Hackbright Academy and its incredible students + staff 🦄
 
+Animated Weather Icons c/o [Josh Bader](http://codepen.io/joshbader/) 💯
+
 This application is for learning purposes only. All code is reproducible and shareable.
