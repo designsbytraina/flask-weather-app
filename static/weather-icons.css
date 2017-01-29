@@ -33,7 +33,7 @@
   display: block;
   width: 4.5625em;
   height: 1em;
-  background: currentColor;
+  background: rgba(0,0,0,0);
   box-shadow: 0 0.4375em 0 -0.0625em #fff;
 }
 .cloud:nth-child(2) {
@@ -58,7 +58,7 @@
   width: 2.5em;
   height: 2.5em;
   margin: -1.25em;
-  background: currentColor;
+  background: rgba(0,0,0,0);
   border-radius: 50%;
   box-shadow: 0 0 0 0.375em #fff;
   animation: spin 12s infinite linear;
@@ -107,7 +107,7 @@
   width: 3.75em;
   height: 3.75em;
   margin: 0.375em 0 0 -2em;
-  background: currentColor;
+  background: rgba(0,0,0,0);
 }
 
 .rain:after {

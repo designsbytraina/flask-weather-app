@@ -1,11 +1,15 @@
-<!-- TODO -->
+<!-- Results page for Flask Weather App -->
 <!DOCTYPE html>
 <html>
 <head>
 	<title>What is the weather?</title>
-	<!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS from Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Fonts from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+	<!-- Emojis for Fun -->
+	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	<!-- Import stylesheets -->
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 	<link rel="stylesheet" type="text/css" href="../static/weather-icons.css">
 	<style>
@@ -16,23 +20,18 @@
 		h1, h3 {
 			color: {{ font }};
 		}
-
-		.panel {
-			background-color: rgba(0,0,0,0);
-			border: none;
-			text-align: center;
-		}
 	</style>
 </head>
 <body>
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<!-- TODO -->
+			<!-- Display location as entered by user -->
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
 				<h1 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{ location }}</h1>
 			</div>
 
+			<!-- Choose icon to display using jinja if/else statements -->
 			{% if icon == 'rain' %}
           		<div class="icon rainy">
   					<div class="cloud"></div>
@@ -69,16 +68,22 @@
 
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-				<h3 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{ temp }}&deg;F</h3>
+				<h3 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{ temp }}&deg;F &#43; {{ description }}</h3>
 			</div>
-			<div class="row">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-				<h3 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{ sentiment }}</h3>
-			</div>
-			<div class="row">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-				<h3 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{ message }}</h3>
-			</div>
+
+			<!-- Determine messaging to display to user based on weather -->
+			{% if is_jacket %}
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+					<h3 class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><i class="em em---1"></i> you should wear a jacket <i class="em em-plus1"></i></h3>
+				</div>
+			{% elif not is_jacket %}
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+					<h3 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">you should be <i class="em em-ok_hand"></i> without a jacket</h3>
+				</div>
+			{% endif %}
+
 		</div>
 	</div>
 </body>

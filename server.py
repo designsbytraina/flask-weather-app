@@ -1,8 +1,8 @@
-# TODO
-from flask import Flask, render_template, request, jsonify
-# TODO
+# Import Flask
+from flask import Flask, render_template, request
+# Import requests library to make call to Accuweather API
 import requests
-# TODO
+# Import os to get API_KEY which was sourced from secrets.sh
 import os
 
 # Always keep your API Key secret
@@ -40,7 +40,7 @@ def get_results():
     """Make request to Accuweather API and display result to user."""
 
     # Get form variable from request
-    location = request.args.get('location').lower().capitalize()
+    location = request.args.get('location').lower()
 
     # Define payload for query to Accuweather API
     payload = {'apikey':API_KEY, 'q':location, 'language':'en-us'}
@@ -54,53 +54,69 @@ def get_results():
     # Make call to helper function get_current_weather() with location_key
     weather_obj = get_current_weather(location_key)
 
-    # TODO - Add logic for weather graphics and color changes
+    # Logic to support background color changes, icon choice needed on frontend
     if weather_obj['temp'] <= 80.0:
 
-        if 'rain' in weather_obj['sentiment'].lower():
+        # If the lowered description includes the word rain, choose rain icon
+        if 'rain' in weather_obj['description'].lower():
             icon = 'rain'
+
+            # Define is_jacket, which will trigger a message on the frontend based on T/F
             is_jacket = True
 
+            # Define background colors based on time of day
             if weather_obj['is_day']: # if True
                 bg_color = LT_GREY
             else:
                 bg_color = DK_GREY
 
-        elif 'thunder' in weather_obj['sentiment'].lower():
+        # If the lowered description includes the word thunder, choose thunder icon
+        elif 'thunder' in weather_obj['description'].lower():
             icon = 'thunder'
+
+            # Define is_jacket, which will trigger a message on the frontend based on T/F
             is_jacket = True
 
+            # Define background colors based on time of day
             if weather_obj['is_day']: # if True
                 bg_color = LT_GREY
             else:
                 bg_color = DK_GREY
 
-        elif 'snow' in weather_obj['sentiment'].lower():
+        # If the lowered description includes the word snow, choose snow icon
+        elif 'snow' in weather_obj['description'].lower():
             icon = 'snow'
-            is_jacket = True
             bg_color = LT_GREY
 
-        elif 'sun' in weather_obj['sentiment'].lower():
+            # Define is_jacket, which will trigger a message on the frontend based on T/F
+            is_jacket = True
+
+        # If the lowered description includes the word sun, choose sun icon
+        elif 'sun' in weather_obj['description'].lower():
             icon = 'sun'
 
+            # Define background colors based on time of day
             if weather_obj['is_day']: # if True
                 bg_color = LT_BLUE
             else:
                 bg_color = DK_BLUE
 
+            # Determine is the weather is sunny and cold and define is_jacket
             if weather_obj['temp'] <= 65.0:
                 is_jacket = True
             else:
                 is_jacket = False
 
-        elif 'cloud' in weather_obj['sentiment'].lower():
+        elif 'cloud' in weather_obj['description'].lower():
             icon = 'cloud'
 
+            # Define background colors based on time of day
             if weather_obj['is_day']: # if True
                 bg_color = LT_BLUE_GREY
             else:
                 bg_color = DK_BLUE_GREY
 
+            # Determine is the weather is cloudy and cold and define is_jacket
             if weather_obj['temp'] <= 65.0:
                 is_jacket = True
             else:
@@ -110,6 +126,7 @@ def get_results():
             icon = 'cloud'
             is_jacket = False
 
+            # Define background colors based on time of day
             if weather_obj['is_day']:
                 bg_color = LT_BLUE
             else:
@@ -120,30 +137,26 @@ def get_results():
         icon = 'cloud'
         is_jacket = False
 
+        # Define background colors based on time of day
         if weather_obj['is_day']: # if True
             bg_color = LT_BLUE
         else:
             bg_color = DK_BLUE
 
-    # TODO - Add logic for serving different messages based on weather conditions
-    if is_jacket:
-        message = 'You should wear a jacket'
-    else:
-        message = 'You should be okay without a jacket'
-
+    # Define font colors based on time of day to give better contrast
     if weather_obj['is_day']:
-        font_color = '#000000'
+        font_color = '#151A2B'
     else:
-        font_color = '#FFFFFF'
+        font_color = '#AEDFFF'
 
     # Render template passing weather object attributes to be accessible on the frontend
     return render_template('results.html',
                             color=bg_color,
                             font=font_color,
                             icon=icon,
-                            message=message,
+                            is_jacket=is_jacket,
                             location=location,
-                            sentiment=weather_obj['sentiment'],
+                            description=weather_obj['description'],
                             temp=weather_obj['temp'])
 
 
@@ -158,12 +171,12 @@ def get_current_weather(location):
     response = requests.get('http://dataservice.accuweather.com/currentconditions/v1/%s' % location, params=payload)
 
     # Define variables using attributes returned in JSON
-    sentiment = response.json()[0]['WeatherText']
+    description = response.json()[0]['WeatherText']
     is_daytime = response.json()[0]['IsDayTime']
     curr_temp = response.json()[0]['Temperature']['Imperial']['Value']
 
     # Create a weather_object to pass back to show_results() for chosen attributes
-    weather_obj = {'temp':curr_temp, 'is_day':is_daytime, 'sentiment':sentiment}
+    weather_obj = {'temp':curr_temp, 'is_day':is_daytime, 'description':description}
     
     # Return a weather_object to show_results() which has invoked get_current_weather()
     return weather_obj
@@ -174,4 +187,4 @@ def get_current_weather(location):
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads" our
     # web app if we change the code.
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
