@@ -32,13 +32,41 @@
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
 				<h1 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{ location }}</h1>
 			</div>
-			<div class="icon thunder-storm">
-  				<div class="cloud"></div>
-  				<div class="lightning">
-    				<div class="bolt"></div>
-    				<div class="bolt"></div>
-  				</div>
-			</div>
+
+			{% if icon == 'rain' %}
+          		<div class="icon rainy">
+  					<div class="cloud"></div>
+  					<div class="rain"></div>
+				</div>
+        	{% elif icon == 'thunder' %}
+        		<div class="icon thunder-storm">
+  					<div class="cloud"></div>
+  					<div class="lightning">
+    					<div class="bolt"></div>
+    					<div class="bolt"></div>
+  					</div>
+				</div>
+          	{% elif icon == 'snow' %}
+          		<div class="icon flurries">
+  					<div class="cloud"></div>
+  					<div class="snow">
+    					<div class="flake"></div>
+    					<div class="flake"></div>
+  					</div>
+				</div>
+          	{% elif icon == 'sun' %}
+          		<div class="icon sunny">
+  					<div class="sun">
+    					<div class="rays"></div>
+  					</div>
+				</div>
+          	{% elif icon == 'cloud' %}
+          		<div class="icon cloudy">
+					<div class="cloud"></div>
+  					<div class="cloud"></div>
+				</div>
+        	{% endif %}
+
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
 				<h3 class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{ temp }}&deg;F</h3>
