@@ -36,7 +36,7 @@ def index():
 
 
 @app.route('/get-weather', methods=['GET'])
-def get_results():
+def get_weather():
     """Make request to Accuweather API and display result to user."""
 
     # Get form variable from request
