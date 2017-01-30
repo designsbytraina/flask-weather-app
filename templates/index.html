@@ -2,43 +2,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>What is the weather?</title>
-	<!-- Latest compiled and minified CSS from Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- Fonts from Google -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-	<!-- Emojis for Fun -->
-	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-	<!-- Import stylesheet -->
-	<link rel="stylesheet" type="text/css" href="../static/styles.css">
-	<style>
-		body {
-			width:800px;
-			background-color:rgba(21, 62, 97, 1);
-			text-align: center;
-			margin: 0 auto;
-		}
-		h1, h2 {
-			color:#FB8B72; 
-			padding-bottom: 15px;
-		}
-	</style>
+    <title>What is the weather?</title>
+    <!-- Latest compiled and minified CSS from Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Fonts from Google -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <!-- Emojis for Fun -->
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <!-- Import stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <style>
+        body {
+            width:800px;
+            background-color:rgba(21, 62, 97, 1);
+            text-align: center;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color:#FB8B72; 
+            padding-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<div class="row" style="margin:0 auto;">
-				<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<!-- By adding a form action, the form data is sent to '/get-weather' route on the server for processing -->
-					<form action="/get-weather">
-						<h1><i class="em em-boom"></i> <strong>HELP MEEEEE</strong> <i class="em em-boom"></i></h1>
-						<h2>should i wear a jacket?</h2>
-						<input type="text" name="location" placeholder="location" style="border:1px dotted grey; border-radius:5px; padding:5px;">
-						<input type="submit" class="btn btn-default" style="border:none; border-radius:5px; padding:8px; margin-left:15px; font-size:12px;">
-		   			</form>
-	   			</div>
-			</div>
-		</div>
-	</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="margin:0 auto;">
+                <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- By adding a form action, the form data is sent to '/get-weather' route on the server for processing -->
+                    <form action="/get-weather">
+                        <h1><i class="em em-boom"></i> <strong>HELP MEEEEE</strong> <i class="em em-boom"></i></h1>
+                        <h2>should i wear a jacket?</h2>
+                        <input type="text" name="location" placeholder="location" style="border:1px dotted grey; border-radius:5px; padding:5px;">
+                        <input type="submit" class="btn btn-default" style="border:none; border-radius:5px; padding:8px; margin-left:15px; font-size:12px;">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -25,7 +25,7 @@ Next, create and source a virtual environment so that you can install the requir
 
 ```sh
 $ virtualenv env
-$ source env
+$ source env/bin/activate
 ```
 
 After sourcing your virtual environment, you can use pip to install the requirements. Please check out the [pip documentation](https://pip.pypa.io/en/stable/) for instructions on usage.
