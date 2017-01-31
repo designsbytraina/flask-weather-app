@@ -5,6 +5,9 @@ import requests
 # Import os to get API_KEY which was sourced from secrets.sh
 import os
 
+# Import our weather UI helper function!
+from weather_ui import get_ui_attributes
+
 # Always keep your API Key secret
 # Source secrets.sh file to use API Key
 API_KEY = os.environ['ACCUWEATHER_API_KEY']
@@ -12,15 +15,6 @@ API_KEY = os.environ['ACCUWEATHER_API_KEY']
 # "__name__" is a special Python variable for the name of the current module
 # Flask wants to know this to know what any imported things are relative to.
 app = Flask(__name__)
-
-# Global variables - color choices for background based on weather and time of day
-LT_BLUE = '#73C5FB'
-DK_BLUE = '#2E3261'
-LT_BLUE_GREY = '#81AFD6'
-DK_BLUE_GREY = '#334A66'
-LT_GREY = '#A4A3C7'
-DK_GREY = '#41414F'
-
 
 ##################################
 # ROUTING
@@ -86,111 +80,6 @@ def get_weather():
         description=weather_obj['description'],
         temp=weather_obj['temp'],
     )
-
-def get_ui_attributes(description, is_day, temp):
-    """Get the UI attributes based on the weather parameters."""
-
-    # Logic to support background color changes, icon choice needed on frontend
-    if temp <= 80.0:
-
-        # If the lowered description includes the word rain, choose rain icon
-        if 'rain' in description:
-            icon = 'rain'
-
-            # Define is_jacket, which will trigger a message on the frontend based on T/F
-            is_jacket = True
-
-            # Define background colors based on time of day
-            if is_day:
-                bg_color = LT_GREY
-            else:
-                bg_color = DK_GREY
-
-        # If the lowered description includes the word thunder, choose thunder icon
-        elif 'thunder' in description:
-            icon = 'thunder'
-
-            # Define is_jacket, which will trigger a message on the frontend based on T/F
-            is_jacket = True
-
-            # Define background colors based on time of day
-            if is_day:
-                bg_color = LT_GREY
-            else:
-                bg_color = DK_GREY
-
-        # If the lowered description includes the word snow, choose snow icon
-        elif 'snow' in description:
-            icon = 'snow'
-            bg_color = LT_GREY
-
-            # Define is_jacket, which will trigger a message on the frontend based on T/F
-            is_jacket = True
-
-        # If the lowered description includes the word sun, choose sun icon
-        elif 'sun' in description:
-            icon = 'sun'
-
-            # Define background colors based on time of day
-            if is_day:
-                bg_color = LT_BLUE
-            else:
-                bg_color = DK_BLUE
-
-            # Determine is the weather is sunny and cold and define is_jacket
-            if temp <= 65.0:
-                is_jacket = True
-            else:
-                is_jacket = False
-
-        elif 'cloud' in description:
-            icon = 'cloud'
-
-            # Define background colors based on time of day
-            if is_day:
-                bg_color = LT_BLUE_GREY
-            else:
-                bg_color = DK_BLUE_GREY
-
-            # Determine is the weather is cloudy and cold and define is_jacket
-            if temp <= 65.0:
-                is_jacket = True
-            else:
-                is_jacket = False
-
-        else:
-            icon = 'cloud'
-            is_jacket = False
-
-            # Define background colors based on time of day
-            if is_day:
-                bg_color = LT_BLUE
-            else:
-                bg_color = DK_BLUE
-
-    # Else if the temp is above 80F
-    else:
-        icon = 'cloud'
-        is_jacket = False
-
-        # Define background colors based on time of day
-        if is_day:
-            bg_color = LT_BLUE
-        else:
-            bg_color = DK_BLUE
-
-    # Define font colors based on time of day to give better contrast
-    if is_day:
-        font_color = '#151A2B'
-    else:
-        font_color = '#AEDFFF'
-
-    return {
-        'bg_color': bg_color,
-        'font_color': font_color,
-        'icon': icon,
-        'is_jacket': is_jacket,
-    }
 
 # Process weather data using the location key passed as a parameter from show_results()
 def get_current_weather(location):
